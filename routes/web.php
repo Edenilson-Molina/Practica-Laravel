@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GradoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/grados', [GradoController::class, 'index'])->name('grados.index');
+    Route::post('/grados/store', [GradoController::class, 'store'])->name('grados.store');
+    Route::get('/grados/edit/{grado}', [GradoController::class, 'edit'])->name('grados.edit');
+    Route::put('/grados/update/{grado}', [GradoController::class, 'update'])->name('grados.update');
+    Route::delete('/grados/destroy/{grado}', [GradoController::class, 'destroy'])->name('grados.destroy');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
