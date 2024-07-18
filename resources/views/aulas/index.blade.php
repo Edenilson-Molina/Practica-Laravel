@@ -1,8 +1,8 @@
 <x-app-layout>
-    @section('title', 'Grados')
+    @section('title', 'Aulas')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Grados disponibles
+            Aulas disponibles
         </h2>
     </x-slot>
 
@@ -10,17 +10,15 @@
         <section class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <article class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex flex-col p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('grados.store') }}" method="POST"  >
+                    <form action="{{ route('aulas.store') }}" method="POST" >
                         @csrf
-                        <div class="inline-flex w-full flex-col items-start gap-1.5 stroke-black transition-colors duration-300 ease-in-out focus-within:stroke-blue-700 max-w-sm">
-                            <label class="font-medium transition-colors duration-300 ease-in-out peer-disabled:opacity-70 text-xs whitespace-nowrap text-black" for="textfield-1">Grado</label>
-                            <div class="relative w-full">
-                            <input id="nombre_grado" name="nombre_grado"
-                                class="mb-0.5 w-full rounded-lg border border-slate-200 px-3 text-sm font-medium placeholder-slate-400 outline-none transition-all duration-300 ease-in-out disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 disabled:placeholder-slate-400focus:border-blue-600 py-2"
-                                placeholder="Ingrese el nombre del grado" required>
-                            </div>                    
-                        </div>
-                        <div class="pt-1">
+                        <label for="grado_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grados disponibles</label>
+                        <select id="grado_id" name="grado_id" title="Seleccione un grado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach ($grados as $grado)
+                                <option value="{{ $grado->id }}">{{ $grado->nombre_grado }}</option>
+                            @endforeach
+                        </select>
+                        <div class="py-2">
                             <button type="submit" class="group relative inline-flex h-[36px] items-center justify-center rounded-full bg-neutral-950 py-1 pl-4 pr-8 font-medium text-neutral-50">
                                 <span class="z-10 pr-2">Guardar</span>
                                 <div class="absolute right-1 inline-flex h-8 w-8 items-center justify-end rounded-full bg-neutral-700 transition-[width] group-hover:w-[calc(100%-8px)]">
@@ -33,15 +31,15 @@
                         </div>     
                     </form>     
                     <section>
-                        <h2 class="font-semibold">Lista de Grados</h2>
-                        @foreach ($grados as $grado)
+                        <h2 class="font-semibold">Lista de Aulas</h2>
+                        @foreach ($aulas as $aula)
                             <div class="flex flex-row justify-between">
                                 <div>
-                                    <p>{{ $grado->nombre_grado }}</p>
+                                    <p>{{ $aula->grado->nombre_grado }} | {{ $aula->updated_at}}</p>
                                 </div>
                                 <div>
-                                    <a href="{{route('grados.edit',$grado)}}" class="text-blue-600">Editar</a>
-                                    <form action="{{route('grados.destroy', ['grado'=> $grado])}}" method="POST" class="inline">
+                                    <a href="{{route('aulas.edit',$aula)}}" class="text-blue-600">Editar</a>
+                                    <form action="{{route('aulas.destroy', ['aula'=> $aula])}}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600">Eliminar</button>

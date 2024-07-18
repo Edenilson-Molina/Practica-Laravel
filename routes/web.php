@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GradoController;
+use App\Http\Controllers\AulaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/grados/edit/{grado}', [GradoController::class, 'edit'])->name('grados.edit');
     Route::put('/grados/update/{grado}', [GradoController::class, 'update'])->name('grados.update');
     Route::delete('/grados/destroy/{grado}', [GradoController::class, 'destroy'])->name('grados.destroy');
+
+    Route::get('/aulas', [AulaController::class, 'index'])->name('aulas.index');
+    Route::post('/aulas/store', [AulaController::class, 'store'])->name('aulas.store');
+    Route::get('/aulas/edit/{aula}', [AulaController::class, 'edit'])->name('aulas.edit');
+    Route::put('/aulas/update/{aula}', [AulaController::class, 'update'])->name('aulas.update');
+    Route::delete('/aulas/destroy/{aula}', [AulaController::class, 'destroy'])->name('aulas.destroy');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
