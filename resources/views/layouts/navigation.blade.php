@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('aulas.index')" :active="request()->routeIs('aulas.index')">
                         Aulas
                     </x-nav-link>
+                    <x-nav-link :href="route('docentes.index')" :active="request()->routeIs('docentes.index')">
+                        Docentes
+                    </x-nav-link>
                 </div>
             </div>
 

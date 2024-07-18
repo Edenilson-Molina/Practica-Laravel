@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GradoController;
 use App\Http\Controllers\AulaController;
+use App\Http\Controllers\DocenteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/aulas/update/{aula}', [AulaController::class, 'update'])->name('aulas.update');
     Route::delete('/aulas/destroy/{aula}', [AulaController::class, 'destroy'])->name('aulas.destroy');
     
+    Route::resource('/docentes', DocenteController::class);
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
