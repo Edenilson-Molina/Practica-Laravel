@@ -6,19 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Aula extends Model
+class ProgramaAnual extends Model
 {
     use HasFactory;
-    protected $table = 'aulas';
+    protected $table = 'programa_anuals';
     protected $guarded = [];
 
-    public function grado(): BelongsTo
+    public function docente(): BelongsTo
     {
-        return $this->belongsTo(Grado::class);
+        return $this->belongsTo(Docente::class);
     }
 
-    public function programa_anuals(): HasMany
+    public function aula(): BelongsTo
     {
-        return $this->hasMany(ProgramaAnual::class);
+        return $this->belongsTo(Aula::class);
     }
 }
